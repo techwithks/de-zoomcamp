@@ -142,3 +142,6 @@ dev:
   POSTGRES_PASSWORD: "{{ env_var('POSTGRES_PASSWORD') }}"
   POSTGRES_HOST: "{{ env_var('POSTGRES_HOST') }}"
   POSTGRES_PORT: "{{ env_var('POSTGRES_PORT') }}"
+
+  #google
+  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "de-zoomcamp24.json"
