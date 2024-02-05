@@ -9,13 +9,24 @@ if 'test' not in globals():
 
 @data_loader
 def load_data_from_api(*args, **kwargs):
-    """
-    Template for loading data from API
-    """
-    url = ''
-    response = requests.get(url)
+    # List to store DataFrames for each month
+    data_frames = []
 
-    return pd.read_csv(io.StringIO(response.text), sep=',')
+    # Loop through months 10, 11, and 12
+    for month in range(10, 13):
+        # Format the URL for each month
+        url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2020-{month:02d}.csv.gz"
+        
+        # Read data into DataFrame
+        df = pd.read_csv(url, parse_dates=['lpep_pickup_datetime', 'lpep_dropoff_datetime'], low_memory=False)
+        
+        # Append the DataFrame to the list
+        data_frames.append(df)
+
+    # Concatenate DataFrames for the final quarter
+    final_quarter_df = pd.concat(data_frames, ignore_index=True)
+
+    return final_quarter_df
 
 
 @test
